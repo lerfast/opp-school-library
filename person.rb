@@ -18,6 +18,12 @@ class Person
     of_age? || @parent_permission
   end
 
+  def add_rental(book, date)
+    rental = Rental.new(date, book, self)
+    @rentals << rental
+    book.add_rental(rental) unless book.rentals.include?(rental)
+  end
+
   private
 
   def of_age?
