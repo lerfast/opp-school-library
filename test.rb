@@ -17,10 +17,10 @@ puts "Capitalized name: #{capitalized_person.correct_name}"
 capitalized_trimmed_person = TrimmerDecorator.new(capitalized_person)
 puts "Capitalized and trimmed name: #{capitalized_trimmed_person.correct_name}"
 
-classroom = Classroom.new("5th Grade")
+classroom = Classroom.new('5th Grade')
 student = Student.new('maximilianus', 22, true, classroom)
 puts "#{student.name} belongs to the classroom: #{student.classroom.label}"
 
-book = Book.new("Harry Potter", "J.K. Rowling")
-rental = Rental.new("2023-10-02", book, person)
+book = Book.new('Harry Potter', 'J.K. Rowling')
+rental = Rental.new('2023-10-02', book, person)
 puts "#{person.name} borrowed the book #{rental.book.title} on #{rental.date}"
