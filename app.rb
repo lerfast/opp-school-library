@@ -1,3 +1,4 @@
+require 'pry'
 require_relative 'person'
 require_relative 'student'
 require_relative 'teacher'
@@ -25,6 +26,7 @@ class App
       puts 'No People found!!!'
     else
       @people.each do |person|
+        binding.pry
         if person.is_a?(Student)
           puts "Type: Student, ID: #{person.id}, Name: #{person.age}, Age: #{person.name}, Classroom: #{person.classroom.label}, Number of Rentals: #{person.rentals.count}"
         else
