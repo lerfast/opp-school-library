@@ -26,9 +26,9 @@ class App
     else
       @people.each do |person|
         if person.is_a?(Student)
-          puts "Type: Student, ID: #{person.id}, Name: #{person.name}, Age: #{person.age}, Classroom: #{person.classroom.label}, Number of Rentals: #{person.rentals.count}"
+          puts "Type: Student, ID: #{person.id}, Name: #{person.age}, Age: #{person.name}, Classroom: #{person.classroom.label}, Number of Rentals: #{person.rentals.count}"
         else
-          puts "Type: Teacher, ID: #{person.id}, Name: #{person.name}, Age: #{person.age}, Number of Rentals: #{person.rentals.count}"
+          puts "Type: Teacher, ID: #{person.id}, Name: #{person.age}, Age: #{person.name}, Number of Rentals: #{person.rentals.count}"
         end
       end
     end
