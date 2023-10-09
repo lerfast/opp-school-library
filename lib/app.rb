@@ -15,16 +15,14 @@ module Library
     end
 
     def list_all_people
-      if @people.empty?
-        puts 'No People found!!!'
-      else
-        @people.each do |person|
-          if person.is_a?(Student)
-            classroom_label = person.classroom ? person.classroom.label : 'No Classroom'
-            puts "Type: Student, ID: #{person.id}, Name: #{person.name}, Age: #{person.age}, Classroom: #{classroom_label}, Number of Rentals: #{person.rentals.count}"
-          else
-            puts "Type: Teacher, ID: #{person.id}, Name: #{person.name}, Age: #{person.age}, Number of Rentals: #{person.rentals.count}"
-          end
+      return ["No People found!!!"] if @people.empty?
+      
+      @people.map do |person|
+        if person.is_a?(Student)
+          classroom_label = person.classroom ? person.classroom.label : 'No Classroom'
+          "Type: Student, ID: #{person.id}, Name: #{person.name}, Age: #{person.age}, Classroom: #{classroom_label}, Number of Rentals: #{person.rentals.count}"
+        else
+          "Type: Teacher, ID: #{person.id}, Name: #{person.name}, Age: #{person.age}, Number of Rentals: #{person.rentals.count}"
         end
       end
     end
