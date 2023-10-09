@@ -17,8 +17,8 @@ module Library
       puts '6 - List all rentals by person ID'
       puts '7 - Exit'
     end
-    
-    def get_user_input
+
+    def user_input
       gets.chomp
     end
 
@@ -29,7 +29,7 @@ module Library
         books.each { |book| puts book }
       end
     end
-    
+
     def display_people(people)
       if people.is_a?(String)
         puts people
@@ -38,14 +38,14 @@ module Library
       end
     end
 
-    def get_person_data
+    def person_data
       print 'Do you want to create a student (1) or a teacher (2)? [Input the number]: '
       choice = gets.chomp
       print 'Name: '
       name = gets.chomp
       print 'Age: '
       age = gets.chomp.to_i
-      
+
       case choice
       when '1'
         print 'Has parent permission? [Y/N]: '
@@ -61,7 +61,7 @@ module Library
       end
     end
 
-    def get_book_data
+    def book_data
       print 'Title: '
       title = gets.chomp
       print 'Author: '
@@ -69,7 +69,7 @@ module Library
       { title: title, author: author }
     end
 
-def create_rental_ui
+    def create_rental_ui
       puts 'Select a book from the following list by number:'
       @app.books.each_with_index { |book, index| puts "#{index}) Title: #{book.title}, Author: #{book.author}" }
       book_index = gets.chomp.to_i
@@ -86,7 +86,7 @@ def create_rental_ui
       puts @app.create_rental(book_index, person_index, date)
     end
 
-    def get_rental_data
+    def rental_data
       print 'Book index: '
       book_index = gets.chomp.to_i
       print 'Person index: '
@@ -96,18 +96,18 @@ def create_rental_ui
       { book_index: book_index, person_index: person_index, date: date }
     end
 
-    def get_person_id_for_rental
+    def person_id_for_rental
       print 'ID of person: '
       gets.chomp.to_i
     end
 
     def display_rentals(rentals)
-  if rentals.is_a?(String)
-    puts rentals
-  else
-    rentals.each { |rental| puts rental }
-  end
-end
+      if rentals.is_a?(String)
+        puts rentals
+      else
+        rentals.each { |rental| puts rental }
+      end
+    end
 
     def display_response(response)
       puts response

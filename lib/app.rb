@@ -15,8 +15,8 @@ module Library
     end
 
     def list_all_people
-      return ["No People found!!!"] if @people.empty?
-      
+      return ['No People found!!!'] if @people.empty?
+
       @people.map do |person|
         if person.is_a?(Student)
           classroom_label = person.classroom ? person.classroom.label : 'No Classroom'
