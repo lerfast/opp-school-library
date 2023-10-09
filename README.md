@@ -88,6 +88,13 @@ No deployment implemented yet
 - Twitter: [@twitterhandle](https://twitter.com/lerfast)
 - LinkedIn: [LinkedIn](https://www.linkedin.com/in/luis-emilio-rojas-rojas-6ba90a8a/)
 
+
+👤 **Javier Jesús Martinez Fariñas**
+
+- GitHub: [@jlcarrascof](https://github.com/jlcarrascof)
+- Twitter: [@javiersistemas](https://twitter.com/javiersistemas)
+
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- FUTURE FEATURES -->
