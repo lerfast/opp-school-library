@@ -1,4 +1,4 @@
-lib/models/book.rb
+lib /models/book.rb
 
 class Book
   attr_accessor :title, :author, :rentals
