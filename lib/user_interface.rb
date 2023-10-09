@@ -26,7 +26,7 @@ module Library
         when '6'
           list_rentals_by_person_id_ui
         when '7'
-          puts 'Goodbye!'
+          puts 'Goodbye, and thank you for using my app!'
         else
           puts 'Invalid option. Please choose between 1 and 7.'
         end
