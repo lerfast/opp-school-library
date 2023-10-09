@@ -1,5 +1,3 @@
-lib /models/book.rb
-
 class Book
   attr_accessor :title, :author, :rentals
 
@@ -13,3 +11,4 @@ class Book
     Rental.new(date, self, person)
   end
 end
+
