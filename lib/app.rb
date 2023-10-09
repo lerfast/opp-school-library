@@ -28,16 +28,15 @@ module Library
         end
       end
     end
-    
 
     def create_person(type, name, age, extra_attribute = nil)
       case type
       when :student
-        student = Student.new(age, name, extra_attribute)
+        student = Student.new(age, name: name, parent_permission: extra_attribute)
         @people << student
         'Student created successfully!'
       when :teacher
-        teacher = Teacher.new(age, name, extra_attribute)
+        teacher = Teacher.new(age, name: name, specialization: extra_attribute)
         @people << teacher
         'Teacher created successfully!'
       else
