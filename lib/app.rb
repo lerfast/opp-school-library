@@ -5,7 +5,7 @@ module Library
     attr_accessor :books, :people, :rentals
 
     def initialize
-      load_data 
+      load_data
       @books ||= []
       @people ||= []
       @rentals ||= []
@@ -13,11 +13,13 @@ module Library
 
     def list_all_books
       return 'No Book found!!!' if @books.empty?
+
       @books.map { |book| "Title: #{book.title}, Author: #{book.author}" }
     end
 
     def list_all_people
       return ['No People found!!!'] if @people.empty?
+
       @people.map do |person|
         if person.is_a?(Student)
           classroom_label = person.classroom ? person.classroom.label : 'No Classroom'
@@ -27,6 +29,7 @@ module Library
         end
       end
     end
+
     def create_person(type, name, age, extra_attribute = nil)
       case type
       when :student
@@ -59,14 +62,15 @@ module Library
     def list_rentals_by_person_id(id)
       rentals = @rentals.filter { |rental| rental.person.id == id }
       return "The person with ID #{id} hasn't rented any books." if rentals.empty?
+
       rentals.map { |rental| "Date: #{rental.date}, Book: #{rental.book.title}" }
     end
+
     def save_data
-      
       books_data = @books.map { |book| { title: book.title, author: book.author } }
       File.write('books.json', JSON.dump(books_data))
-  
-      
+
+
       people_data = @people.map do |person|
         if person.is_a?(Teacher)
           { id: person.id, name: person.name, age: person.age, specialization: person.specialization }
@@ -75,8 +79,8 @@ module Library
         end
       end
       File.write('people.json', JSON.dump(people_data))
-  
-      
+
+
       rentals_data = @rentals.map do |rental|
         {
           date: rental.date,
@@ -87,29 +91,41 @@ module Library
       File.write('rentals.json', JSON.dump(rentals_data))
     end
 
+    def load_books
+      return unless File.exist?('books.json')
+
+      data = JSON.parse(File.read('books.json'))
+      @books = data.map { |item| Book.new(item['title'], item['author']) }
+    end
+
+    def load_people
+      return unless File.exist?('people.json')
+
+      data = JSON.parse(File.read('people.json'))
+      @people = data.map do |item|
+        if item['specialization']
+          Teacher.new(item['age'], id: item['id'], name: item['name'], specialization: item['specialization'])
+        else
+          Student.new(item['age'], id: item['id'], name: item['name'], parent_permission: item['parent_permission'])
+        end
+      end
+    end
+
+    def load_rentals
+      return unless File.exist?('rentals.json')
+
+      data = JSON.parse(File.read('rentals.json'))
+      @rentals = data.map do |item|
+        book = @books.find { |b| b.title == item['book']['title'] && b.author == item['book']['author'] }
+        person = @people.find { |p| p.name == item['person']['name'] && p.age == item['person']['age'] }
+        Rental.new(item['date'], book, person)
+      end
+    end
+
     def load_data
-      if File.exist?('books.json')
-        data = JSON.parse(File.read('books.json'))
-        @books = data.map { |item| Book.new(item['title'], item['author']) }
-      end
-  
-      if File.exist?('people.json')
-        data = JSON.parse(File.read('people.json'))
-        @people = data.map do |item|
-          item['specialization'] ?
-            Teacher.new(item['age'], id: item['id'], name: item['name'], specialization: item['specialization']) :
-            Student.new(item['age'], id: item['id'], name: item['name'], parent_permission: item['parent_permission'])
-        end
-      end
-  
-      if File.exist?('rentals.json')
-        data = JSON.parse(File.read('rentals.json'))
-        @rentals = data.map do |item|
-          book = @books.find { |b| b.title == item['book']['title'] && b.author == item['book']['author'] }
-          person = @people.find { |p| p.name == item['person']['name'] && p.age == item['person']['age'] }
-          Rental.new(item['date'], book, person)
-        end
-      end
+      load_books
+      load_people
+      load_rentals
     end
   end
 end
