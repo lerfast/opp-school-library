@@ -1,22 +1,23 @@
+require 'json'
+
 module Library
   class App
     attr_accessor :books, :people, :rentals
 
     def initialize
-      @books = []
-      @people = []
-      @rentals = []
+      load_data # Carga los datos cuando la aplicación inicia
+      @books ||= []
+      @people ||= []
+      @rentals ||= []
     end
 
     def list_all_books
       return 'No Book found!!!' if @books.empty?
-
       @books.map { |book| "Title: #{book.title}, Author: #{book.author}" }
     end
 
     def list_all_people
       return ['No People found!!!'] if @people.empty?
-
       @people.map do |person|
         if person.is_a?(Student)
           classroom_label = person.classroom ? person.classroom.label : 'No Classroom'
@@ -26,7 +27,6 @@ module Library
         end
       end
     end
-
     def create_person(type, name, age, extra_attribute = nil)
       case type
       when :student
@@ -58,10 +58,9 @@ module Library
 
     def list_rentals_by_person_id(id)
       rentals = @rentals.filter { |rental| rental.person.id == id }
-
       return "The person with ID #{id} hasn't rented any books." if rentals.empty?
-
       rentals.map { |rental| "Date: #{rental.date}, Book: #{rental.book.title}" }
     end
+   
   end
 end

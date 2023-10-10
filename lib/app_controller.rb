@@ -37,6 +37,7 @@ module Library
           @ui.display_rentals(rentals)
         when '7'
           @ui.goodbye_message
+         
         else
           @ui.invalid_option_message
         end
