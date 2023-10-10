@@ -70,7 +70,6 @@ module Library
       books_data = @books.map { |book| { title: book.title, author: book.author } }
       File.write('books.json', JSON.dump(books_data))
 
-
       people_data = @people.map do |person|
         if person.is_a?(Teacher)
           { id: person.id, name: person.name, age: person.age, specialization: person.specialization }
@@ -79,7 +78,6 @@ module Library
         end
       end
       File.write('people.json', JSON.dump(people_data))
-
 
       rentals_data = @rentals.map do |rental|
         {
