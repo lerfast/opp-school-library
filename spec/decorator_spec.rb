@@ -4,7 +4,7 @@ RSpec.describe Decorator do
   let(:mock_nameable) { instance_double('Nameable') }
 
   before do
-    allow(mock_nameable).to receive(:correct_name).and_return("MockName")
+    allow(mock_nameable).to receive(:correct_name).and_return('MockName')
   end
 
   subject { Decorator.new(mock_nameable) }
@@ -17,7 +17,7 @@ RSpec.describe Decorator do
 
   describe '#correct_name' do
     it 'delegates to the nameable object' do
-      expect(subject.correct_name).to eq("MockName")
+      expect(subject.correct_name).to eq('MockName')
     end
   end
 end
